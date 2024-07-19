@@ -114,5 +114,9 @@ dependencies {
     implementation("androidx.compose.material:material:1.6.8")
 
 
+    // https://mvnrepository.com/artifact/androidx.compose.foundation/foundation
+    implementation("androidx.compose.foundation:foundation:1.7.0-beta05")
+
+
 
 }

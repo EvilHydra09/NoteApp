@@ -1,5 +1,6 @@
 package com.example.countryapp.presentation.homescreen
 
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.BorderStroke
@@ -140,7 +141,7 @@ fun HomeScreen(modifier: Modifier = Modifier, viewModel: HomeScreenViewModel = h
                         contentDescription = null,
                         modifier = Modifier.size(28.dp)
                     )
-                    AnimatedVisibility(!lazyListState.isScrollingUp()) {
+                    AnimatedVisibility(lazyListState.isScrollingUp()) {
                         Text(
                             text = "New",
                             modifier = Modifier
@@ -216,7 +217,8 @@ fun NoteStaggeredGrid(
             NoteCard(
                 note = it,
                 navigationToEdit = navigationToEdit,
-                onDelete = onDelete
+                onDelete = onDelete,
+                modifier = Modifier.animateItem()
             )
         }
     }
@@ -227,7 +229,8 @@ fun NoteStaggeredGrid(
 fun NoteCard(
     note: Note,
     navigationToEdit: (Int) -> Unit,
-    onDelete: (Int) -> Unit
+    onDelete: (Int) -> Unit,
+    modifier: Modifier
 ) {
     var isLongPressed by remember { mutableStateOf(false) }
 
@@ -236,7 +239,7 @@ fun NoteCard(
         label = "Border Stroke"
     )
     OutlinedCard(
-        modifier = Modifier
+        modifier = modifier
             .combinedClickable(
                 onClick = {
                     if (isLongPressed) {
